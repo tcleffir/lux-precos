@@ -233,6 +233,15 @@
             letter-spacing: 0.5px;
         }
 
+        .disclaimer-note {
+            font-size: 10px;
+            font-weight: 600;
+            color: var(--gray-dk);
+            letter-spacing: 0.4px;
+            font-style: italic;
+            margin-top: 4px;
+        }
+
         .legend { display: flex; gap: 20px; flex-wrap: wrap; }
 
         .legend-item {
@@ -617,7 +626,10 @@
 <!-- ══ CONTENT ══ -->
 <main class="content">
     <div class="content-meta">
-        <span class="currency-note">Valores em R$/MWh</span>
+        <div>
+            <span class="currency-note">Valores em R$/MWh</span>
+            <p class="disclaimer-note">&#9888; Valores indicativos — sujeitos a variações de mercado e PLD.</p>
+        </div>
         <div class="legend">
             <div class="legend-item">
                 <div class="legend-dot" style="background:var(--blue-md);"></div>Convencional
@@ -646,6 +658,7 @@
     <div class="note-item"><span class="note-marker">**</span>Não há encargos de energia no Preço.</div>
     <div class="note-item"><span class="note-marker">***</span>Seguro garantia ou Fiança Bancária no valor de 2 meses de faturamento.</div>
     <div class="note-item"><span class="note-marker">****</span>Modulação Flat.</div>
+    <div class="note-item"><span class="note-marker">&#9888;</span>Os valores apresentados são <strong>indicativos</strong> e não constituem proposta firme. Preços finais sujeitos a oscilações de mercado e variações do PLD.</div>
 </section>
 
 <!-- ══ FOOTER CTA ══ -->
