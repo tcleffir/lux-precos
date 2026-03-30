@@ -442,17 +442,90 @@
         }
 
         /* ── RESPONSIVE ── */
+
+        /* Tablet largo / desktop pequeno */
         @media (max-width: 1080px) {
             .regions-grid { grid-template-columns: 1fr 1fr; }
         }
 
-        @media (max-width: 720px) {
-            .header, .tab-bar, .content, .notes-section, .footer-cta, .footer, .cta-banner { padding-left: 20px; padding-right: 20px; }
+        /* Tablet / landscape mobile */
+        @media (max-width: 768px) {
+            .header, .tab-bar, .cta-banner, .content, .footer-cta, .footer {
+                padding-left: 20px;
+                padding-right: 20px;
+            }
+            .notes-section {
+                margin-left: 20px;
+                margin-right: 20px;
+                padding: 14px 18px;
+            }
             .regions-grid { grid-template-columns: 1fr; }
-            .notes-section { grid-template-columns: 1fr; margin-left: 20px; margin-right: 20px; }
-            .premises { flex-direction: column; gap: 16px; }
+            .notes-section { grid-template-columns: 1fr; }
+            .premises { flex-direction: column; gap: 14px; }
             .cta-inner { flex-direction: column; align-items: flex-start; }
+            .cta-btn { width: 100%; justify-content: center; }
             .header-tagline { display: none; }
+            .tab-btn { padding: 12px 20px; }
+            .content { padding: 20px 20px 28px; }
+        }
+
+        /* Mobile portrait */
+        @media (max-width: 480px) {
+            .header {
+                padding: 0 14px;
+                min-height: 60px;
+                gap: 10px;
+            }
+            .logo-wrap svg { height: 36px; }
+            .date-badge { padding: 6px 12px; }
+            .date-badge .date { font-size: 13px; }
+            .date-badge .label { font-size: 8px; letter-spacing: 1.5px; }
+
+            .cta-banner { padding: 16px 14px; }
+            .premises { gap: 12px; }
+            .premise-icon { width: 34px; height: 34px; }
+            .premise-icon svg { width: 16px; height: 16px; }
+            .premise-text strong { font-size: 11px; }
+            .premise-text span { font-size: 10px; }
+            .cta-btn { padding: 12px 20px; font-size: 11px; letter-spacing: 1px; }
+
+            .tab-bar { padding: 0 14px; }
+            .tab-btn { padding: 10px 14px; font-size: 11px; letter-spacing: 1px; }
+
+            .content { padding: 14px 14px 20px; }
+            .content-meta { flex-direction: column; align-items: flex-start; gap: 8px; }
+            .legend { gap: 12px; }
+            .legend-item { font-size: 10px; }
+
+            .card-header { padding: 10px 12px; }
+            .card-header h3 { font-size: 10px; letter-spacing: 1px; }
+
+            .price-card { overflow-x: auto; }
+            .price-table th { padding: 7px 10px; font-size: 9px; }
+            .price-table td { padding: 8px 10px; font-size: 12px; }
+            .price-table td:first-child { font-size: 10px; }
+            .row-2026 td.td-conv,
+            .row-2026 td.td-i5,
+            .row-2026 td.td-i1 { font-size: 13px; }
+
+            .notes-section { margin-left: 14px; margin-right: 14px; padding: 12px 14px; }
+            .note-item { font-size: 10px; }
+
+            .footer-cta { padding: 24px 14px; }
+            .footer-cta p { font-size: 12px; }
+            .footer-cta-btn { padding: 14px 24px; font-size: 11px; letter-spacing: 1px; width: 100%; justify-content: center; }
+
+            .footer { padding: 12px 14px; font-size: 9px; }
+        }
+
+        /* Telas muito pequenas (320px) */
+        @media (max-width: 360px) {
+            .header { padding: 0 10px; }
+            .tab-btn { padding: 8px 10px; font-size: 10px; }
+            .content { padding: 12px 10px 16px; }
+            .notes-section { margin-left: 10px; margin-right: 10px; }
+            .price-table th { padding: 6px 8px; }
+            .price-table td { padding: 7px 8px; font-size: 11px; }
         }
     </style>
 </head>
