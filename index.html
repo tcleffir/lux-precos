@@ -399,6 +399,11 @@
 
         .note-marker { color: var(--green-lt); font-weight: 800; flex-shrink: 0; }
 
+        .note-item--full {
+            grid-column: 1 / -1;
+            white-space: nowrap;
+        }
+
         /* ── FOOTER CTA ── */
         .footer-cta {
             background: var(--navy);
@@ -470,6 +475,7 @@
             }
             .regions-grid { grid-template-columns: 1fr; }
             .notes-section { grid-template-columns: 1fr; }
+            .note-item--full { white-space: normal; }
             .premises { flex-direction: column; gap: 14px; }
             .cta-inner { flex-direction: column; align-items: flex-start; }
             .cta-btn { width: 100%; justify-content: center; }
@@ -519,6 +525,7 @@
 
             .notes-section { margin-left: 14px; margin-right: 14px; padding: 12px 14px; }
             .note-item { font-size: 10px; }
+            .note-item--full { white-space: normal; }
 
             .footer-cta { padding: 24px 14px; }
             .footer-cta p { font-size: 12px; }
@@ -658,7 +665,7 @@
     <div class="note-item"><span class="note-marker">**</span>Não há encargos de energia no Preço.</div>
     <div class="note-item"><span class="note-marker">***</span>Seguro garantia ou Fiança Bancária no valor de 2 meses de faturamento.</div>
     <div class="note-item"><span class="note-marker">****</span>Modulação Flat.</div>
-    <div class="note-item"><span class="note-marker">&#9888;</span>Os valores apresentados são <strong>indicativos</strong> e não constituem proposta firme. Preços finais sujeitos a oscilações de mercado e variações do PLD.</div>
+    <div class="note-item note-item--full"><span class="note-marker">&#9888;</span>Os valores apresentados são <strong>indicativos</strong> e não constituem proposta firme. Preços finais sujeitos a oscilações de mercado e variações do PLD.</div>
 </section>
 
 <!-- ══ FOOTER CTA ══ -->
