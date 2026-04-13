@@ -543,7 +543,41 @@
             .price-table th { padding: 6px 8px; }
             .price-table td { padding: 7px 8px; font-size: 11px; }
         }
+        /* ── CHART SECTION ── */
+        .chart-section {
+            margin: 28px 0 8px;
+            background: var(--white);
+            border-radius: 14px;
+            padding: 28px 28px 20px;
+            border: 1px solid var(--gray-lt);
+            box-shadow: 0 2px 14px rgba(11,42,61,0.07);
+        }
+
+        .chart-title {
+            font-size: 10px;
+            font-weight: 700;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            color: var(--green-md);
+            margin-bottom: 20px;
+        }
+
+        .chart-title span {
+            color: var(--navy);
+            margin-left: 6px;
+        }
+
+        .chart-wrap {
+            position: relative;
+            height: 340px;
+        }
+
+        @media (max-width: 768px) {
+            .chart-wrap { height: 260px; }
+            .chart-section { padding: 18px 14px 14px; }
+        }
     </style>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.4/dist/chart.umd.min.js"></script>
 </head>
 <body>
 
@@ -652,9 +686,17 @@
 
     <div id="tab-atacadista" class="tab-content active">
         <div class="regions-grid" id="grid-atacadista"></div>
+        <div class="chart-section">
+            <div class="chart-title">Histórico de Preços —<span>Atacadista · Sudeste · Jul/26–Dez/26</span></div>
+            <div class="chart-wrap"><canvas id="chart-atacadista"></canvas></div>
+        </div>
     </div>
     <div id="tab-varejista" class="tab-content">
         <div class="regions-grid" id="grid-varejista"></div>
+        <div class="chart-section">
+            <div class="chart-title">Histórico de Preços —<span>Varejista · Sudeste · Jul/26–Dez/26</span></div>
+            <div class="chart-wrap"><canvas id="chart-varejista"></canvas></div>
+        </div>
     </div>
 </main>
 
@@ -771,6 +813,126 @@ document.getElementById('display-date').textContent = `${dd}/${mm}/${yyyy}`;
 
 buildGrid('atacadista');
 buildGrid('varejista');
+
+// ============================================================
+//  HISTÓRICO DE PREÇOS  (valores já exibidos = preço – desconto)
+//  Adicione uma nova entrada a cada atualização de preços.
+//  Região de referência: Sudeste · Período: Jul/26 – Dez/26
+// ============================================================
+const HISTORY = {
+    labels: ["31/03/2026", "06/04/2026", "10/04/2026", "13/04/2026"],
+
+    atacadista: {
+        conv: [285, 285, 290, 290],
+        i5:   [315, 315, 320, 320],
+        i1:   [475, 475, 480, 480]
+    },
+    varejista: {
+        conv: [325, 325, 330, 330],
+        i5:   [355, 355, 360, 360],
+        i1:   [515, 515, 520, 520]
+    }
+};
+
+function buildChart(canvasId, market) {
+    const ctx = document.getElementById(canvasId).getContext('2d');
+    new Chart(ctx, {
+        type: 'line',
+        data: {
+            labels: HISTORY.labels,
+            datasets: [
+                {
+                    label: 'Convencional',
+                    data: HISTORY[market].conv,
+                    borderColor: '#2F6F8F',
+                    backgroundColor: 'rgba(47,111,143,0.10)',
+                    borderWidth: 2.5,
+                    pointRadius: 5,
+                    pointHoverRadius: 7,
+                    pointBackgroundColor: '#2F6F8F',
+                    tension: 0.3,
+                    fill: false
+                },
+                {
+                    label: 'Incentivada 50%',
+                    data: HISTORY[market].i5,
+                    borderColor: '#4F7F99',
+                    backgroundColor: 'rgba(79,127,153,0.10)',
+                    borderWidth: 2.5,
+                    pointRadius: 5,
+                    pointHoverRadius: 7,
+                    pointBackgroundColor: '#4F7F99',
+                    tension: 0.3,
+                    fill: false
+                },
+                {
+                    label: 'Incentivada 100%',
+                    data: HISTORY[market].i1,
+                    borderColor: '#4E7D5B',
+                    backgroundColor: 'rgba(78,125,91,0.10)',
+                    borderWidth: 2.5,
+                    pointRadius: 5,
+                    pointHoverRadius: 7,
+                    pointBackgroundColor: '#4E7D5B',
+                    tension: 0.3,
+                    fill: false
+                }
+            ]
+        },
+        options: {
+            responsive: true,
+            maintainAspectRatio: false,
+            interaction: { mode: 'index', intersect: false },
+            plugins: {
+                legend: {
+                    position: 'top',
+                    labels: {
+                        font: { family: 'Montserrat', size: 11, weight: '600' },
+                        color: '#6B7C88',
+                        boxWidth: 12,
+                        boxHeight: 12,
+                        padding: 20
+                    }
+                },
+                tooltip: {
+                    backgroundColor: '#0B2A3D',
+                    titleFont: { family: 'Montserrat', size: 12, weight: '700' },
+                    bodyFont: { family: 'Montserrat', size: 12 },
+                    padding: 12,
+                    callbacks: {
+                        label: ctx => ` ${ctx.dataset.label}: R$ ${ctx.parsed.y}/MWh`
+                    }
+                }
+            },
+            scales: {
+                x: {
+                    grid: { color: 'rgba(0,0,0,0.05)' },
+                    ticks: {
+                        font: { family: 'Montserrat', size: 11, weight: '600' },
+                        color: '#6B7C88'
+                    }
+                },
+                y: {
+                    grid: { color: 'rgba(0,0,0,0.05)' },
+                    ticks: {
+                        font: { family: 'Montserrat', size: 11 },
+                        color: '#6B7C88',
+                        callback: v => 'R$ ' + v
+                    },
+                    title: {
+                        display: true,
+                        text: 'R$/MWh',
+                        font: { family: 'Montserrat', size: 10, weight: '600' },
+                        color: '#6B7C88'
+                    }
+                }
+            }
+        }
+    });
+}
+
+buildChart('chart-atacadista', 'atacadista');
+buildChart('chart-varejista', 'varejista');
 </script>
 </body>
 </html>
