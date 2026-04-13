@@ -578,6 +578,7 @@
         }
     </style>
     <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.4/dist/chart.umd.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chartjs-plugin-annotation@3.0.1/dist/chartjs-plugin-annotation.min.js"></script>
 </head>
 <body>
 
@@ -901,6 +902,56 @@ function buildChart(canvasId, market) {
                     padding: 12,
                     callbacks: {
                         label: ctx => ` ${ctx.dataset.label}: R$ ${ctx.parsed.y}/MWh`
+                    }
+                },
+                annotation: {
+                    annotations: {
+                        pldRange: {
+                            type: 'box',
+                            yMin: 57,
+                            yMax: 786,
+                            backgroundColor: 'rgba(139,195,74,0.06)',
+                            borderColor: 'rgba(139,195,74,0.35)',
+                            borderWidth: 1,
+                            borderDash: [4, 4],
+                            label: { display: false }
+                        },
+                        pldMin: {
+                            type: 'line',
+                            yMin: 57,
+                            yMax: 57,
+                            borderColor: 'rgba(139,195,74,0.7)',
+                            borderWidth: 1.5,
+                            borderDash: [5, 4],
+                            label: {
+                                display: true,
+                                content: 'PLD Mín  R$ 57',
+                                position: 'start',
+                                backgroundColor: 'rgba(139,195,74,0.15)',
+                                color: '#4E7D5B',
+                                font: { family: 'Montserrat', size: 10, weight: '700' },
+                                padding: { x: 8, y: 4 },
+                                borderRadius: 4
+                            }
+                        },
+                        pldMax: {
+                            type: 'line',
+                            yMin: 786,
+                            yMax: 786,
+                            borderColor: 'rgba(220,80,80,0.6)',
+                            borderWidth: 1.5,
+                            borderDash: [5, 4],
+                            label: {
+                                display: true,
+                                content: 'PLD Estrutural  R$ 786',
+                                position: 'start',
+                                backgroundColor: 'rgba(220,80,80,0.10)',
+                                color: '#b94040',
+                                font: { family: 'Montserrat', size: 10, weight: '700' },
+                                padding: { x: 8, y: 4 },
+                                borderRadius: 4
+                            }
+                        }
                     }
                 }
             },
