@@ -844,6 +844,18 @@ function buildChart(canvasId, market) {
                 {
                     label: 'Convencional',
                     data: HISTORY[market].conv,
+                    borderColor: '#0B2A3D',
+                    backgroundColor: 'rgba(11,42,61,0.10)',
+                    borderWidth: 2.5,
+                    pointRadius: 5,
+                    pointHoverRadius: 7,
+                    pointBackgroundColor: '#0B2A3D',
+                    tension: 0.3,
+                    fill: false
+                },
+                {
+                    label: 'Incentivada 50%',
+                    data: HISTORY[market].i5,
                     borderColor: '#2F6F8F',
                     backgroundColor: 'rgba(47,111,143,0.10)',
                     borderWidth: 2.5,
@@ -854,26 +866,14 @@ function buildChart(canvasId, market) {
                     fill: false
                 },
                 {
-                    label: 'Incentivada 50%',
-                    data: HISTORY[market].i5,
-                    borderColor: '#4F7F99',
-                    backgroundColor: 'rgba(79,127,153,0.10)',
-                    borderWidth: 2.5,
-                    pointRadius: 5,
-                    pointHoverRadius: 7,
-                    pointBackgroundColor: '#4F7F99',
-                    tension: 0.3,
-                    fill: false
-                },
-                {
                     label: 'Incentivada 100%',
                     data: HISTORY[market].i1,
-                    borderColor: '#4E7D5B',
-                    backgroundColor: 'rgba(78,125,91,0.10)',
+                    borderColor: '#8BC34A',
+                    backgroundColor: 'rgba(139,195,74,0.10)',
                     borderWidth: 2.5,
                     pointRadius: 5,
                     pointHoverRadius: 7,
-                    pointBackgroundColor: '#4E7D5B',
+                    pointBackgroundColor: '#8BC34A',
                     tension: 0.3,
                     fill: false
                 }
